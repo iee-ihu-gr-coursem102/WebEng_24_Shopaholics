@@ -2,7 +2,7 @@
 $host = "localhost";
 $dbname = "shopaholics_db";
 $username = "meladma";
-$password = "!8pmM$@tz";
+$password = "";
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
