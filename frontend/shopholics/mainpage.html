@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Site with Menu and Boxes</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .menu {
+            width: 20%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .menu button:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: #ffcc00;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .box-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu">
+            <button id="menu1">ADD NEW LIST</button>
+            <button>Menu 2</button>
+            <button>Menu 3</button>
+            <button>Menu 4</button>
+            <button>Menu 5</button>
+            <button>Menu 6</button>
+            <button>Menu 7</button>
+        </div>
+        <div class="content">
+            <div class="box-container" id="boxContainer">
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('menu1').addEventListener('click', () => {
+            const boxContainer = document.getElementById('boxContainer');
+            const boxName = prompt("Enter a name for the new box:");
+            if (boxName) {
+                const newBox = document.createElement('div');
+                newBox.className = 'box';
+                newBox.textContent = boxName;
+                boxContainer.appendChild(newBox);
+            }
+        });
+    </script>
+</body>
+</html>
