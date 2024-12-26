@@ -16,19 +16,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Fetch all shopping lists
     function fetchLists() {
-        fetch(`${API_URL}?action=getLists`)
-            .then(response => response.json())
-            .then(data => {
-                const listContainer = document.getElementById("listContainer");
-                listContainer.innerHTML = ''; // Clear the list
-                if (data.status === 'success') {
-                    data.data.forEach(list => {
-                        listContainer.innerHTML += `<li>${list.Title} (ID: ${list.ListID})</li>`;
-                    });
-                } else {
-                    alert('Error fetching lists: ' + data.message);
-                }
+    fetch(`${API_URL}?action=getLists`)
+    .then(response => response.json())
+    .then(data => {
+        const listContainer = document.getElementById("listContainer");
+        listContainer.innerHTML = '';
+        if (data.status === 'success') {
+            data.data.forEach(list => {
+                // Default icon path if Icon is undefined
+                const iconPath = list.Icon ? 
+                    (list.Icon.startsWith('http') ? list.Icon : `http://localhost/shopaholics/${list.Icon}`) : 
+                    'http://localhost/shopaholics/img/default-icon.png';
+
+                listContainer.innerHTML += `
+                    <li>${list.Title} (ID: ${list.ListID}) 
+                        <img src="${iconPath}" alt="Category Icon" style="width:50px;height:50px;">
+                    </li>`;
             });
+        } else {
+            alert('Error fetching lists: ' + data.message);
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+
+
     }
 
     // Add a new list

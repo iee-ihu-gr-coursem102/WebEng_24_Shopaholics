@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Site with Menu and Boxes</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .menu {
+            width: 20%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .menu button:hover {
+            background-color: #0056b3;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .box-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-items: center;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: #ffcc00;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #333;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .popup button {
+            margin: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .popup .delete {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .popup .delete:hover {
+            background-color: #cc0000;
+        }
+
+        .popup .make-list {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .popup .make-list:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .box-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .box-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+        <div class="container">
+        <div class="menu">
+            <button id="menu1">CREATE A POST-IT</button>
+            <button id="menu2">Active Post-It</button>
+            <button id="menu3">Archived Post-It</button>
+            <button id="menu4">Share Post-It</button>
+        </div>
+        <div class="content">
+            <div class="box-container" id="boxContainer">
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <button class="delete" id="deleteBox">Delete</button>
+        <button class="make-list" id="makeList">Make List</button>
+    </div>
+    
+    <script>
+        const boxContainer = document.getElementById('boxContainer');
+        const popup = document.getElementById('popup');
+        const deleteBoxButton = document.getElementById('deleteBox');
+        const makeListButton = document.getElementById('makeList');
+        let currentBox = null;
+
+        document.getElementById('menu1').addEventListener('click', () => {
+            const boxName = prompt("Enter a name for the new box:");
+            if (boxName) {
+                const newBox = document.createElement('div');
+                newBox.className = 'box';
+                newBox.textContent = boxName;
+                newBox.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    currentBox = newBox;
+                    showPopup(newBox);
+                });
+                boxContainer.appendChild(newBox);
+            }
+        });
+
+        function showPopup(box) {
+            popup.style.display = 'flex';
+            const rect = box.getBoundingClientRect();
+            popup.style.top = `${rect.top + window.scrollY + box.offsetHeight / 2}px`;
+            popup.style.left = `${rect.left + window.scrollX + box.offsetWidth / 2}px`;
+        }
+
+        document.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+
+        deleteBoxButton.addEventListener('click', () => {
+            if (currentBox) {
+                boxContainer.removeChild(currentBox);
+                popup.style.display = 'none';
+            }
+        });
+
+        makeListButton.addEventListener('click', () => {
+            if (currentBox) {
+                const boxName = currentBox.textContent;
+                window.location.href = `list.html?name=${encodeURIComponent(boxName)}`;
+            }
+        });
+
+    </script>
+</body>
+</html>
