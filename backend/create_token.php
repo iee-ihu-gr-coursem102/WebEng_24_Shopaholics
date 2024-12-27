@@ -31,8 +31,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           echo mysqli_stmt_bind_param($stmt, "sss", $new_token, $expiration_date, $username);
             
             // Set parameters
-            $new_token = "1234567812345678123456781234567812345678123456781234567812345678";
-			$expiration_date = "2024-12-19";
+            $new_token = bin2hex(random_bytes(16));
+			$expiration_date = date("Y-m-d H:i:s", time() + 60 * 30);;
 			$username = trim($_POST["email"]);
             
             // Attempt to execute the prepared statement
