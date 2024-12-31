@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping List API Tester</title>
+    <link rel="stylesheet" href="css/main.css"> <!-- Optional -->
+</head>
+<body>
+    <h1>Shopping List API Tester</h1>
+
+    <!-- Section to Fetch and Display Lists -->
+    <section>
+        <h2>All Shopping Lists</h2>
+        <button id="fetchListsBtn">Fetch Lists</button>
+        <ul id="listContainer"></ul>
+    </section>
+
+    <!-- Form to Add a New List -->
+    <section>
+        <h2>Add a New List</h2>
+        <input type="text" id="listTitle" placeholder="List Title">
+        <input type="number" id="listCategory" placeholder="Category ID">
+        <button id="addListBtn">Add List</button>
+        <p id="addListMessage"></p>
+    </section>
+
+    <!-- Section to Fetch Items for a Specific List -->
+    <section>
+        <h2>Items in a List</h2>
+        <input type="number" id="listID" placeholder="Enter List ID">
+        <button id="fetchItemsBtn">Fetch Items</button>
+        <ul id="itemContainer"></ul>
+    </section>
+
+    <!-- Form to Add a New Item -->
+    <section>
+        <h2>Add an Item to a List</h2>
+        <input type="number" id="itemListID" placeholder="List ID">
+        <input type="text" id="itemName" placeholder="Item Name">
+        <input type="number" id="itemQuantity" placeholder="Quantity">
+        <input type="text" id="itemUnit" placeholder="Measuring Unit (e.g., pcs)">
+        <button id="addItemBtn">Add Item</button>
+        <p id="addItemMessage"></p>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="js/api.js"></script>
+</body>
+</html>
