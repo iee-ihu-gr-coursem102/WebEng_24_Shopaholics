@@ -2,8 +2,13 @@
 //Configuration for database connection
 
 $host       = "localhost";
+<<<<<<< HEAD
 $username   = "meladma";
 $password   = "!8pmM$@tz";
+=======
+$username   = "root";
+$password   = "";
+>>>>>>> 2a6dd2f9fb89d45e29ab2928258317f463468f77
 $dbname     = "shopaholics"; 
 $dsn        = "mysql:host=$host;dbname=$dbname"; 
 $options    = array(
@@ -17,4 +22,8 @@ $link = mysqli_connect($host,$username,$password,$dbname);
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }	
+<<<<<<< HEAD
 ?>		  
+=======
+?>		  
+>>>>>>> 2a6dd2f9fb89d45e29ab2928258317f463468f77
