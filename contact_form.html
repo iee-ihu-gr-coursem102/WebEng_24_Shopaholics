@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<header>
+    <a href="index.php">
+        <img src="images/main_logo.png" width="105px">
+    </a>
+</header>
+<body>
+    <h1>Φόρμα επικοινωνίας</h1>
+    
+    <form method="post" action="mailer/send-email.php">
+        <label for="name">Όνομα</label>
+        <input type="text" name="name" id="name" required>
+        
+        <label for="email">e-mail</label>
+        <input type="email" name="email" id="email" required>
+        
+        <label for="subject">Θέμα</label>
+        <input type="text" name="subject" id="subject" required>
+        
+        <label for="message">Μήνυμα</label>
+        <textarea name="message" id="message" required></textarea>
+        
+        <br>
+        
+        <button>Αποστολή</button>
+    </form>
+
+</body>
+</html>
