@@ -1,8 +1,0 @@
-{
-    "status": "success",
-    "data": [
-        { "ListID": 1, "Title": "Grocery List", "category_id": 1, "active": 1, "creation_date": "2024-06-18" },
-        { "ListID": 2, "Title": "Electronics", "category_id": 2, "active": 1, "creation_date": "2024-06-17" }
-    ]
-}
-

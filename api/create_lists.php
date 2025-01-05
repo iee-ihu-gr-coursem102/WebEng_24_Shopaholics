@@ -1,20 +1,24 @@
 <?php
+// Initialize the session
+session_start(); 
+// Check if the user is already logged in, if yes then redirect him to welcome page
+if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
+  header("location: login.php");
+  exit;
+}
 require "../config.php";
 header('Content-Type: application/json; charset=utf-8');
 
-//print_r($_POST);
-
-if (isset($_POST['user_id']) && isset($_POST['list_id'])) {
+if (isset($_SESSION['user_id']) && isset($_POST['list_id'])) {
 		try {
 		$connection = new PDO($dsn, $username, $password, $options);
 		
-		//note object
 		$updated_lists = array(
 								
-				//"user_id"			=> $_POST['user_id'],			
+				//"list_order_id"	=> $_POST['list_order_id'],
 				//"list_id"			=> $_POST['list_id'],
-				"list_order_id"		=> $_POST['list_order_id'],
-				"Title"				=> $_POST['Title'],
+				"title"				=> $_POST['title'],
+				"category"			=> $_POST['category'],
 				"icon"				=> $_POST['icon'],
 				"active"			=> $_POST['active'],	
 				"creation_date"		=> $_POST['creation_date']
@@ -25,6 +29,8 @@ if (isset($_POST['user_id']) && isset($_POST['list_id'])) {
 		$duplicates .= "{$key} = VALUES({$key}), ";
 		}
 		$duplicates = rtrim($duplicates, ', '); 
+		
+		//print_r($duplicates);
 		
 	$sql = sprintf(
 		"INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s",
@@ -41,15 +47,23 @@ if (isset($_POST['user_id']) && isset($_POST['list_id'])) {
 		
 		$owners_list = array(
 				
-				"user_id"			=> $_POST['user_id'],			
-				"list_id"			=> $lastInsertId
+				"user_id"			=> $_SESSION['user_id'],			
+				"list_id"			=> $lastInsertId,
+				"list_order_id"		=> $_POST['list_order_id']
 		);		
 		
+		$duplicates = '';
+		foreach ($owners_list as $key => $value) {
+		$duplicates .= "{$key} = VALUES({$key}), ";
+		}
+		$duplicates = rtrim($duplicates, ', '); 	
+		
 	$sql_junc_t_user_list = sprintf(
-		"INSERT INTO %s (%s) VALUES (%s) ",
+		"INSERT INTO %s (%s) VALUES (%s) ON DUPLICATE KEY UPDATE %s",
 		"junc_t_user_list",
 		implode(", ", array_keys($owners_list)),
-		":" . implode(", :", array_keys($owners_list))
+		":" . implode(", :", array_keys($owners_list)),
+		$duplicates
 		);	
 		
 		$statement = $connection->prepare($sql_junc_t_user_list);
@@ -59,11 +73,9 @@ if (isset($_POST['user_id']) && isset($_POST['list_id'])) {
 		
 		echo json_encode($response, JSON_UNESCAPED_UNICODE);
 		
-		//print_r($response);
-		
 	}catch(PDOException $error) {
 		  echo $sql . "<br>" . $error->getMessage();
 		} 
-}		
-
+}	
+	
 ?>
