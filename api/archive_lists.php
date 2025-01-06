@@ -10,19 +10,27 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
 require "../config.php";
 header('Content-Type: application/json; charset=utf-8');
 
-if (isset($_POST['list_id']) && isset($_POST['archive_list'])) {
+if (isset($_POST['list_id'])) {
 		try {
 		$connection = new PDO($dsn, $username, $password, $options);
 		
-		//note object
+		$sql_chk_archive = "SELECT active FROM lists WHERE list_id = :list_id";
+		
+		$statement = $connection->prepare($sql_chk_archive);
+		$statement->bindValue(':list_id', $_POST['list_id']);
+		$statement->execute();
+		$active = $statement->fetch(PDO::FETCH_ASSOC);
+		
+		$archived = $active['active'];
+		
+		print_r($archived);
+		
+		if($archived==1){$archived=0;}else{$archived=1;}
+			
+		print_r($archived);	
+		//data object
 		$update_lists = array(
-								
-				//"list_id"			=> $_POST['list_id'],
-				//"list_order_id"	=> $_POST['list_order_id'],
-				"active"			=> $_POST['archive_list'],
-				//"icon"			=> $_POST['icon'],
-				//"active"			=> $_POST['active'],	
-
+				"active"			=> $archived,
 		);
 		
 	$sql = sprintf(

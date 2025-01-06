@@ -2,157 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>HTML Site with Menu and Boxes</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            height: 100vh;
-        }
-
-        .container {
-            display: flex;
-            width: 100%;
-        }
-
-        .menu {
-            width: 20%;
-            background-color: #f0f0f0;
-            padding: 10px;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .menu button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .menu button:hover {
-            background-color: #0056b3;
-        }
-
-        .content {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #ffffff;
-        }
-
-        .box-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            justify-items: center;
-        }
-
-        .box {
-            width: 150px;
-            height: 150px;
-            background-color: #ffcc00;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2em;
-            color: #333;
-        }
-
-        @media (max-width: 768px) {
-            .box-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .box-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <title>Index</title>
 </head>
-<body>
-    <div class="container">
-        <div class="menu">
-            <button id="menu1">ADD NEW LIST</button>
-            <button>Menu 2</button>
-            <button>Menu 3</button>
-            <button>Menu 4</button>
-            <button>Menu 5</button>
-            <button>Menu 6</button>
-            <button>Menu 7</button>
-        </div>
-        <div class="content">
-            <div class="box-container" id="boxContainer">
-            </div>
-        </div>
-    </div>
-    <script>
-        document.getElementById('menu1').addEventListener('click', () => {
-            const boxContainer = document.getElementById('boxContainer');
-            const boxName = prompt("Enter a name for the new box:");
-            if (boxName) {
-                const newBox = document.createElement('div');
-                newBox.className = 'box';
-                newBox.textContent = boxName;
-                boxContainer.appendChild(newBox);
-            }
-        });
-    </script>
-=======
-    <title>Shopping List API Tester</title>
-    <link rel="stylesheet" href="css/main.css"> <!-- Optional -->
-</head>
-<body>
-    <h1>Shopping List API Tester</h1>
 
-    <!-- Section to Fetch and Display Lists -->
-    <section>
-        <h2>All Shopping Lists</h2>
-        <button id="fetchListsBtn">Fetch Lists</button>
-        <ul id="listContainer"></ul>
-    </section>
+<?php require "templates/header.php";?>
 
-    <!-- Form to Add a New List -->
-    <section>
-        <h2>Add a New List</h2>
-        <input type="text" id="listTitle" placeholder="List Title">
-        <input type="number" id="listCategory" placeholder="Category ID">
-        <button id="addListBtn">Add List</button>
-        <p id="addListMessage"></p>
-    </section>
+<body id="top">
+<!--onload="checkUser()"-->
+<!-- Header -->
+<div class="wrapper" style="height:100px;">
+  <div class="align-center">
+    <header id="header" class="skel-layers-fixed" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:center; align-items:center; height:100px;">
+      <h1 class="align-center" ><a href="index.php"><img src="images/main_logo.png" width="100"></a></h1>
+      <span style="width:40px;"></span>
+      <div id="user_profile" ></div>
+      <span style="width:40px;"></span>
+      <button class="button" onclick="logout()">Log Out</button>
+    </header>
+  </div>
+</div>
 
-    <!-- Section to Fetch Items for a Specific List -->
-    <section>
-        <h2>Items in a List</h2>
-        <input type="number" id="listID" placeholder="Enter List ID">
-        <button id="fetchItemsBtn">Fetch Items</button>
-        <ul id="itemContainer"></ul>
-    </section>
+<div class="box">
 
-    <!-- Form to Add a New Item -->
-    <section>
-        <h2>Add an Item to a List</h2>
-        <input type="number" id="itemListID" placeholder="List ID">
-        <input type="text" id="itemName" placeholder="Item Name">
-        <input type="number" id="itemQuantity" placeholder="Quantity">
-        <input type="text" id="itemUnit" placeholder="Measuring Unit (e.g., pcs)">
-        <button id="addItemBtn">Add Item</button>
-        <p id="addItemMessage"></p>
-    </section>
+  <button class="button" onclick="select_lists()">List Options</button>
 
-    <!-- JavaScript -->
-    <script src="js/api.js"></script>
->>>>>>> 2a6dd2f9fb89d45e29ab2928258317f463468f77
+  <button class="button" onclick="addNewListColapse()">ΝΕΑ ΛΙΣΤΑ</button>
+
+  <span style="width:40px;"></span>
+  <button class="button" onclick="archived()" style="fa fa-archive">Archived Lists</button>
+
+  <div id="listoflists_collapsable" style="width: 100px; display: grid;"></div>
+</div>
 </body>
+
 </html>

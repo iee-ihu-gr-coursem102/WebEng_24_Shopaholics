@@ -16,6 +16,9 @@ function user_profile(user){
 	var	surname = obj.Surname;
 	var	email = obj.email;
 		u_p_btn.innerText="Καλώς ήρθες "+name+" "+surname;
+		u_p_btn.onclick = function () {
+			window.location.href = "edit_user_profile.php";
+		};
 		u_p.append(u_p_btn);
 	});
 	}
@@ -26,7 +29,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	
 	const orderNumber = document.getElementsByClassName("count_"+list_id).length;
 	var del_temp='';
-	if (!item_id){item_id = orderNumber+1;};
+	//if (!item_id){item_id = orderNumber+1;};
 	if (!order_id){order_id = orderNumber+1;};
 	
 	if (orderNumber <10) {
@@ -55,7 +58,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	const textArea4 = document.createElement("textarea");
 	const checkBox = document.createElement("input");
 	const select_button = document.createElement("select");
-	const measuring_units = ['gr','kg','ml','lit','cm','m','mins','hours','φέτες','τμχ','πακέτα','συσκευασίες','τενεκές φρικασέ'];
+	const measuring_units = ['','gr','kg','ml','lit','cm','m','mins','hours','φέτες','τμχ','πακέτα','συσκευασίες', 'ζευγάρι'];
 	const select_option = document.createElement("option");
 	measuring_units.forEach((a,b)=>{
 	select_option[b]=new Option(a,b);
@@ -70,8 +73,8 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	div1.setAttribute("id", "row_"+list_id+"_"+order_id);
 	div1.setAttribute("draggable", "true");
 	div1.setAttribute("ondragstart", "start()");
-	div1.setAttribute("ondragover", "dragover()");
-	div1.setAttribute("ondrop", "drop("+item_id+")");
+	div1.setAttribute("ondragover", "dragover("+list_id+")");
+	div1.setAttribute("ondrop", "drop("+list_id+")");
 	div1.setAttribute("class", "count_"+list_id);
 	grabber.setAttribute("width", "10%");
 	grabber.setAttribute("class","drag-handler");
@@ -95,7 +98,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	//this.value = ""}}
 	//textArea1.onchange = function(){noSameNumbers()};
 	
-	td2.setAttribute("width", "50%");	
+	td2.setAttribute("width", "50%");
 	textArea2.setAttribute("name", "item_"+list_id);
 	textArea2.setAttribute("rows", "1");
 	textArea2.onchange = function(){save_list_changes(list_id)};
@@ -112,7 +115,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	textArea3.oninput = function(){this.value = this.value.replace(/\n/g,'');}
 	textArea3.value = quantity;
 	
-	td4.setAttribute("width", "20%");
+	td4.setAttribute("width", "10%");
 	textArea4.setAttribute("draggable", "false");
 	textArea4.setAttribute("style", "text-align:center;")
 	textArea4.setAttribute("maxlength", "12");
@@ -120,8 +123,9 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	textArea4.onchange = function(){save_product_changes(list_id)};
 	textArea4.value = measuring_unit;	
 
-	td5.setAttribute("width", "5%");
-	td5.setAttribute("style", "padding: 0 0 0 10");
+	td5.setAttribute("width", "15%");
+	//td5.setAttribute("style", "padding: 0 0 0 10");
+	//td5.setAttribute("style", "margin: 0 10px 0 0");
 	checkBox.setAttribute("name", "completed_"+list_id);
 	checkBox.setAttribute("type", "checkbox");
 	checkBox.onclick = function(){save_list_changes(list_id)};
@@ -170,9 +174,10 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	document.getElementById("Collapse_List_"+list_id).appendChild(div1
 	);
 	
+	if (item_id){
 	const selected_unit = document.getElementById("m_u_"+item_id);
 	selected_unit.value = measuring_unit;
-	
+	}
 	//save_list_changes(list_id);
 
 }else{
@@ -182,55 +187,60 @@ alert("Δεν μπορείτε να προσθέσετε άλλο αντικεί
 
 function deleteItem(item_id, list_id){
 
-	if(confirm("Θέλετε σίγουρα να διαγράψετε αυτό το αντικείμενο?")){
-	
-	try{
-	var data = new FormData();	
-	data.append("item_id",item_id);
-	const xhttp = new XMLHttpRequest();
-  	xhttp.open("POST", "api/delete.php",true);
-	xhttp.send(data);
-	xhttp.onload = function() {
-		console.log(this.responseText);
-		document.getElementById(item_id).parentNode.remove();
-		reNumberItems(list_id);
+	if(confirm("Θέλετε σίγουρα να διαγράψετε αυτό το αντικείμενο?")) {
+
+		if (isNaN(item_id)) {
+			if (item_id.id.includes("temp_")) {
+				item_id.id = item_id.id.split(item_id.id.slice(0, 5))[1];
+				document.getElementById("row_" + list_id + "_" + item_id.id).remove();
+				reNumberItems(list_id);
+			}
+		} else {
+
+			try {
+				var data = new FormData();
+				data.append("item_id", item_id);
+				const xhttp = new XMLHttpRequest();
+				xhttp.open("POST", "api/delete_lists.php", true);
+				xhttp.send(data);
+				xhttp.onload = function () {
+					console.log(this.responseText);
+					document.getElementById(item_id).parentNode.remove();
+					reNumberItems(list_id);
+				};
+
+			} catch (error) {
+				error.message;
+				alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
+			}
+			//alert("Οι αλλαγές στη λίστα σας αποθηκεύθηκαν.");
+		}
 	}
+}
 	
+function reNumberItems(list_id){
+
+try{
+	if(!list_id){list_id=findList(event.target);};
+		const orderID = Array.from(document.getElementsByClassName("order_id_" + list_id));
+		orderID.forEach((row, index) => {
+			row.value = "";
+			row.value = index+1;
+		});
 	}catch(error){
 	error.message;
 	alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
 	}
-	//alert("Οι αλλαγές στη λίστα σας αποθηκεύθηκαν.");
-	}
-}
-	
-
-
-function reNumberItems(list_id){
-try{
-if(!list_id){list_id=findList(event.target);};
-const rows = Array.from(document.getElementsByClassName("order_id_"+list_id));
-for (var i = 0; i<rows.length; i++){
-		try{
-		rows[i].value = i+1;
-			}catch{
-		}
-	}
 	save_list_changes(list_id);
-	//alert("Οι αλλαγές στη λίστα σας αποθηκεύθηκαν.");
-}catch(error){
-	error.message;
-	alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
-	}
 }
 
 function reNumberLists(list_id){
 try{
 if(!list_id){list_id=findList(event.target);};
-const rows = Array.from(document.getElementsByClassName("order_id_"+list_id));
-for (var i = 0; i<rows.length; i++){
+const lists = Array.from(document.getElementsByClassName("order_id_"+list_id));
+for (var i = 0; i<lists.length; i++){
 		try{
-		rows[i].value = i+1;
+		lists[i].value = i+1;
 			}catch{
 		}
 	}
@@ -243,20 +253,24 @@ for (var i = 0; i<rows.length; i++){
 }	
 
 function findList(list){
-
-let listNumber = list.id;
+	console.log(list.id);
+var list_id="";
+if(list.id.includes("row_")){
+list_id = listNumber.split(listNumber.slice(0,4))[1];
+}
+if(list.id.includes("Collapse_List_")){
+list_id = listNumber.split(listNumber.slice(0,14))[1];
+}
 if(list.id.includes("Collapse_Button_")){
-	list_id = listNumber.split(listNumber.slice(0,16))[1];
-// }else{
-// if (event.target.parentNode.parentNode.parentNode.id.includes("Collapse_List_")){
-	 // listNumber = event.target.parentNode.parentNode.parentNode.id;
-// }else{
-	 // listNumber = event.target.parentNode.parentNode.id;
-// }
-	// list_id = listNumber.split(listNumber.slice(0,14))[1];
+list_id = listNumber.split(listNumber.slice(0,16))[1];
+}
+if(list.id.includes("Collapse_tr_")){
+list_id = listNumber.split(listNumber.slice(0,12))[1];
+}	
+console.log("1. "+list_id);
 return list_id;
 }	
-}
+
 //Add New List Colapsable
 function addNewListColapse(title, list_id){
 
@@ -276,8 +290,6 @@ function addNewListColapse(title, list_id){
 		}
 	}
 
-	if (listNumber <10000) {//remove before production!
-
 	const list = document.createElement("div");
 	const button = document.createElement("button");
 	const newItem = document.createElement("a");
@@ -287,16 +299,13 @@ function addNewListColapse(title, list_id){
 
 	list.setAttribute("id", "Collapse_List_"+list_id);
 	list.setAttribute("class", "collapse ListCount modal-content");
-	list.setAttribute("style", "width: 700px;");
+	list.setAttribute("style", "width: 600px;");
 
 	button.setAttribute("id", "Collapse_Button_"+list_id);
 	button.setAttribute("class", "btn btn-primary");
 	button.setAttribute("data-toggle", "collapse");
 	button.setAttribute("data-target", "#Collapse_List_"+list_id);
 	button.setAttribute("style", "width: 160px; height: 140px;");
-	// button.setAttribute("draggable", "true");
-	// button.setAttribute("ondragstart", "start()");
-	// button.setAttribute("ondragover", "dragover()");
 	
 	newItem.setAttribute("id", "Add_Btn_"+list_id);
 	newItem.setAttribute("class","fa fa-plus");
@@ -309,20 +318,18 @@ function addNewListColapse(title, list_id){
 	new_tr.setAttribute("id", "Collapse_tr_"+list_id);
 	new_tr.setAttribute("draggable", "true");
 	new_tr.setAttribute("ondragstart", "start()");
-	new_tr.setAttribute("ondragover", "dragover()");
-	new_tr.setAttribute("ondrop", "dropList()");
+	new_tr.setAttribute("ondragover", "dragover("+list_id+")");
+	new_tr.setAttribute("ondrop", "dropList("+list_id+")");
 	
 	new_tr.appendChild(button);
 	new_tr.appendChild(list);
 	//new_tr.appendChild(new_td);
 	
+	
 	document.getElementById("listoflists_collapsable").appendChild(new_tr);
 	document.getElementById("Collapse_Button_"+list_id).textContent=title;
 	document.getElementById("Collapse_List_"+list_id).appendChild(newItem);
 
-}else{
-alert("Δεν μπορείτε να προσθέσετε άλλη λίστα!");
-}
 }
 
 function fetch_user_lists(user_id, active){
@@ -362,11 +369,14 @@ function fetch_list_products(list_id){
 	}
 }
 
-function save_list_changes(list_id){
+let debounceTimeout;
+function save_list_changes(list_id) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(function() {
 	
 	var list_items = document.getElementsByClassName("count_"+list_id).length;
 	var item_id = Array.from(document.getElementById("Collapse_List_"+list_id).getElementsByClassName("items_id"));
-	var order_id = document.getElementById("order_id_"+list_id);
+	var order_id = Array.from(document.getElementsByClassName("order_id_"+list_id));
 	var item = Array.from(document.getElementsByName("item_"+list_id));
 	var quantity = Array.from(document.getElementsByName("quantity_"+list_id));
 	var measuring_unit = Array.from(document.getElementsByName("m_u_"+list_id));
@@ -378,7 +388,7 @@ function save_list_changes(list_id){
 for (i=0;i<list_items;i++){
 	data.append("item_id",item_id[i].id);
 	data.append("list_id",list_id);
-	data.append("order_id",i+1);
+	data.append("order_id",order_id[i].value);//i+1);
 	data.append("item",item[i].value);
 	data.append("quantity",quantity[i].value);
 	data.append("measuring_unit",measuring_unit[i].value);
@@ -411,10 +421,11 @@ for (i=0;i<list_items;i++){
 	error.message;
 	alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
 	}
+}, 300); // Debounce delay (300 ms)
 }
 
 function create_new_list(title, list_id, icon){
-
+	
 	var list_order_id = document.getElementsByClassName("ListCount").length;
 	
 	var creation_date = new Date().toISOString().split('T')[0];
@@ -506,19 +517,8 @@ function select_lists(){
 		list.lastChild.remove();
 		list.lastChild.remove();
 		list.lastChild.remove();
-	//alert(list.id);
-	}
-	// checkBox.setAttribute("name", "selected_"+list.id);
-	// checkBox.setAttribute("type", "reset");
-	// checkBox.setAttribute("class","fa fa-times");
-	
-	//list.append(checkBox);
-	
-		// checkBox.onclick = function(){save_list_changes(list_id)};
-		// if (completed==0){checkBox.checked=false;}
-		// else{checkBox.checked=true;};
+		}
 	});
-	
 }
 
 function edit_list(list_id){
@@ -591,11 +591,11 @@ function share_list(list_id){
 }
 
 function archive_list(list_id){
-		
+
 	var data = new FormData();	
 		
 	data.append("list_id",list_id);
-	data.append("archive_list",0);
+	//data.append("archive_list",0);
 	
 	const xhttp = new XMLHttpRequest();
   	xhttp.open("POST", "api/archive_lists.php?",true);
@@ -604,6 +604,22 @@ function archive_list(list_id){
 		console.log(this.responseText);
 	}
 }
+
+function fetch_archived_lists(user_id, active){
+console.log(user_id+ ", " + active);
+	const xhttp = new XMLHttpRequest();
+  	xhttp.open("GET", "api/fetch_lists.php?user_lists="+user_id+"&active_list="+active,true);
+	xhttp.send();
+	xhttp.onload = function() {
+	var obj = JSON.parse(this.responseText);
+	obj.forEach(function(a){
+	const par = document.createElement("p");
+	addNewListColapse(a.title, a.list_id);
+	fetch_list_products(a.list_id);
+	});
+	}	
+}
+
 
 //Fancy Reordering
 var row;
@@ -626,13 +642,12 @@ function start(){
 	}
 }
 
-function dragover(){
+function dragover(base_list){
   var e = event;
   e.preventDefault();
   var chk = e.target.parentNode.parentNode.parentNode.id;
   let child = Array.from(e.target.parentNode.parentNode.children);
-  
-if (e.target.id.includes("Collapse_tr_")){
+if (child[0].id.includes("Collapse_tr_")){
 	if(child.indexOf(e.target.parentNode)>child.indexOf(row)){
 		e.target.parentNode.after(row);
 		}else{
@@ -651,14 +666,12 @@ if (chk.includes("Collapse_List_")){
 		}else{
 		e.target.parentNode.before(row);
 	}
-	//reNumberItems(event.target.parentNode.id);
+	reNumberItems(base_list);
 	}
 }
 
-function drop(){
-alert("true");
-list_id=findList(event.target);
-
+function drop(list_id){
+console.log("You've changed the order of "+list_id+" list.");
 	var temp_btn_order = document.querySelectorAll('[id*="Collapse_Button_"]');
 	temp_btn_order.forEach((a,b)=>{
 	console.log(b);
@@ -678,7 +691,7 @@ list_id=findList(event.target);
 	reNumberItems(base_list);
 }
 
-function dropList(){
+function dropList(list_id){
 
 const curr_lists = Array.from(document.getElementById("listoflists_collapsable").children);
 
