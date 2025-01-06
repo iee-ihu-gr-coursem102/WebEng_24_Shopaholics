@@ -6,6 +6,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
   header("location: login.php");
   exit;
 }
+
 require "../config.php";
 header('Content-Type: application/json; charset=utf-8');
 

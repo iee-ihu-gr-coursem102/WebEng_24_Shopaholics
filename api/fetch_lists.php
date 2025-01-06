@@ -2,7 +2,7 @@
 require "../config.php";
 header('Content-Type: application/json; charset=utf-8');
 
-	if (isset($_GET['user_lists']) && isset($_GET['active_list'])) {
+if (isset($_GET['user_lists']) && isset($_GET['active_list'])) {
 		try {
 			$connection = new PDO($dsn, $username, $password, $options);
 			$user = $_GET['user_lists'];

@@ -23,11 +23,8 @@ if (isset($_POST['list_id'])) {
 		
 		$archived = $active['active'];
 		
-		print_r($archived);
-		
 		if($archived==1){$archived=0;}else{$archived=1;}
 			
-		print_r($archived);	
 		//data object
 		$update_lists = array(
 				"active"			=> $archived,

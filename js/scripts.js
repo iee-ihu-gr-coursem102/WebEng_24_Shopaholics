@@ -21,7 +21,7 @@ function user_profile(user){
 		};
 		u_p.append(u_p_btn);
 	});
-	}
+	};
 }
 
 //Add New List
@@ -30,9 +30,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	const orderNumber = document.getElementsByClassName("count_"+list_id).length;
 	var del_temp='';
 	//if (!item_id){item_id = orderNumber+1;};
-	if (!order_id){order_id = orderNumber+1;};
-	
-	if (orderNumber <10) {
+	if (!order_id){order_id = orderNumber+1;}
 
 	const tbody1 = document.createElement("tbody");
 	const div1 = document.createElement("div");
@@ -55,10 +53,10 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	const textArea1 = document.createElement("textarea");
 	const textArea2 = document.createElement("textarea");		
 	const textArea3 = document.createElement("textarea");
-	const textArea4 = document.createElement("textarea");
+	//const textArea4 = document.createElement("textarea");
 	const checkBox = document.createElement("input");
 	const select_button = document.createElement("select");
-	const measuring_units = ['','gr','kg','ml','lit','cm','m','mins','hours','φέτες','τμχ','πακέτα','συσκευασίες', 'ζευγάρι'];
+	const measuring_units = [' ','gr','kg','ml','lit','cm','m','mins','hours','φέτες','τμχ','πακέτα','συσκευασίες', 'ζευγάρι'];
 	const select_option = document.createElement("option");
 	measuring_units.forEach((a,b)=>{
 	select_option[b]=new Option(a,b);
@@ -67,7 +65,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	select_button.setAttribute("rows", "1");
 	select_button.setAttribute("name", "m_u_"+list_id);
 	select_button.setAttribute("id", "m_u_"+item_id);
-	select_button.onchange = function(){save_list_changes(list_id)};
+	select_button.onchange = function(){save_list_changes(list_id);};
 	select_button.appendChild(select_option);
 	
 	div1.setAttribute("id", "row_"+list_id+"_"+order_id);
@@ -76,7 +74,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	div1.setAttribute("ondragover", "dragover("+list_id+")");
 	div1.setAttribute("ondrop", "drop("+list_id+")");
 	div1.setAttribute("class", "count_"+list_id);
-	grabber.setAttribute("width", "10%");
+	grabber.setAttribute("style", "width: 5%");
 	grabber.setAttribute("class","drag-handler");
 
 	hiddenInput.setAttribute("id", item_id);
@@ -85,55 +83,53 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	if (!item_id){hiddenInput.id = "temp_"+order_id;}
 	else{hiddenInput.id = item_id;}
 
-	td1.setAttribute("style", "text-align:center;")
+	td1.setAttribute("style", "text-align:center;");
 	td1.setAttribute("width", "5%");
 	textArea1.setAttribute("class", "order_id_"+list_id);
 	textArea1.setAttribute("draggable", "false");
 	textArea1.setAttribute("maxlength", "3");
 	textArea1.setAttribute("rows", "1");
-	textArea1.oninput = function(){this.value = this.value.replace(/\n/g,'');}
+	textArea1.oninput = function(){this.value = this.value.replace(/\n/g,'');};
 	if (!order_id){textArea1.value = orderNumber+1;}else{textArea1.value = order_id;}
 
 	//textArea1.oninput = function(){if (!this.value==""&(isNaN(this.value) || this.value < 1 || this.value > 8)) { alert("Επιτρέπονται μόνο μονοψήφιοι αριθμοί από το 1 έως το 8");
 	//this.value = ""}}
 	//textArea1.onchange = function(){noSameNumbers()};
 	
-	td2.setAttribute("width", "50%");
+	td2.setAttribute("style", " width: 40%");
 	textArea2.setAttribute("name", "item_"+list_id);
 	textArea2.setAttribute("rows", "1");
-	textArea2.onchange = function(){save_list_changes(list_id)};
-	textArea2.oninput = function(){this.value = this.value.replace(/\n/g,'');}
+	textArea2.onchange = function(){save_list_changes(list_id);};
+	textArea2.oninput = function(){this.value = this.value.replace(/\n/g,'');};
 	textArea2.value = item;	
 		
-	td3.setAttribute("width", "5%");
+	td3.setAttribute("style", "width: 10%");
 	textArea3.setAttribute("draggable", "false");
 	textArea3.setAttribute("name", "quantity_"+list_id);
-	textArea3.setAttribute("style", "text-align:center;")
+	textArea3.setAttribute("style", "text-align:center;");
 	textArea3.setAttribute("maxlength", "12");
 	textArea3.setAttribute("rows", "1");
-	textArea3.onchange = function(){save_list_changes(list_id)};
-	textArea3.oninput = function(){this.value = this.value.replace(/\n/g,'');}
+	textArea3.onchange = function(){save_list_changes(list_id);};
+	textArea3.oninput = function(){this.value = this.value.replace(/\n/g,'');};
 	textArea3.value = quantity;
 	
-	td4.setAttribute("width", "10%");
-	textArea4.setAttribute("draggable", "false");
-	textArea4.setAttribute("style", "text-align:center;")
-	textArea4.setAttribute("maxlength", "12");
-	textArea4.setAttribute("rows", "1");
-	textArea4.onchange = function(){save_product_changes(list_id)};
-	textArea4.value = measuring_unit;	
+	td4.setAttribute("style", "width: 20%");
+	select_button.setAttribute("draggable", "false");
+	select_button.setAttribute("maxlength", "12");
+	select_button.setAttribute("rows", "1");
+	select_button.onchange = function(){save_product_changes(list_id);};
+	select_button.value = measuring_unit;
 
-	td5.setAttribute("width", "15%");
-	//td5.setAttribute("style", "padding: 0 0 0 10");
-	//td5.setAttribute("style", "margin: 0 10px 0 0");
+	td5.setAttribute("style", "width: 5%");
+	td5.setAttribute("style", "padding: 0px 0px 0px 10px");
 	checkBox.setAttribute("name", "completed_"+list_id);
 	checkBox.setAttribute("type", "checkbox");
-	checkBox.onclick = function(){save_list_changes(list_id)};
+	checkBox.onclick = function(){save_list_changes(list_id);};
 	if (completed==0){checkBox.checked=false;}
-	else{checkBox.checked=true;};
+	else{checkBox.checked=true;}
 
-	td6.setAttribute("width", "5%");
-	td6.setAttribute("style", "padding: 0 0 0 10");
+	td6.setAttribute("style", "width: 5%");
+	//td6.setAttribute("style", "margin: 0 0 0 10px");
 	td6.setAttribute("class", "del_temp");
 	delline.setAttribute("class","fa fa-times");
 	delline.setAttribute("style","font-size: 2.1em; color: lightcoral;");
@@ -158,18 +154,18 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	div1.appendChild(td2);
 	td2.appendChild(textArea2);
 
-	div1.appendChild(td4);
-	td4.appendChild(textArea3);
+	div1.appendChild(td3);
+	td3.appendChild(textArea3);
 	
+	div1.appendChild(td4);
+	td4.appendChild(select_button);
+
 	div1.appendChild(td5);
-	td5.appendChild(select_button);
+	td5.appendChild(checkBox);
 
 	div1.appendChild(td6);
-	td6.appendChild(checkBox);
-
-	div1.appendChild(td7);
 	// td7.appendChild(addline);
-	td7.appendChild(delline);
+	td6.appendChild(delline);
 
 	document.getElementById("Collapse_List_"+list_id).appendChild(div1
 	);
@@ -180,48 +176,43 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	}
 	//save_list_changes(list_id);
 
-}else{
-alert("Δεν μπορείτε να προσθέσετε άλλο αντικείμενο!");
-}
 }
 
 function deleteItem(item_id, list_id){
 
-	if(confirm("Θέλετε σίγουρα να διαγράψετε αυτό το αντικείμενο?")) {
-
-		if (isNaN(item_id)) {
-			if (item_id.id.includes("temp_")) {
-				item_id.id = item_id.id.split(item_id.id.slice(0, 5))[1];
-				document.getElementById("row_" + list_id + "_" + item_id.id).remove();
-				reNumberItems(list_id);
-			}
-		} else {
-
-			try {
-				var data = new FormData();
-				data.append("item_id", item_id);
-				const xhttp = new XMLHttpRequest();
-				xhttp.open("POST", "api/delete_lists.php", true);
-				xhttp.send(data);
-				xhttp.onload = function () {
-					console.log(this.responseText);
-					document.getElementById(item_id).parentNode.remove();
-					reNumberItems(list_id);
-				};
-
-			} catch (error) {
-				error.message;
-				alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
-			}
-			//alert("Οι αλλαγές στη λίστα σας αποθηκεύθηκαν.");
+	if(confirm("Θέλετε σίγουρα να διαγράψετε αυτό το αντικείμενο?")){
+	  if (isNaN(item_id)){
+		if(item_id.id.includes("temp_")){
+		item_id.id = item_id.id.split(item_id.id.slice(0,5))[1];
+		document.getElementById("row_"+list_id+"_"+item_id.id).remove();
 		}
+		}else{
+	
+	try{
+	var data = new FormData();	
+	data.append("item_id",item_id);
+	const xhttp = new XMLHttpRequest();
+  	xhttp.open("POST", "api/delete_lists.php",true);
+	xhttp.send(data);
+	xhttp.onload = function() {
+		console.log(this.responseText);
+		document.getElementById(item_id).parentNode.remove();
+		
+		};
+	}catch(error){
+	error.message;
+	alert("Ούπς! Κάτι πήγε στραβά!\nΟι αλλαγές στη λίστα σας ΔΕΝ αποθηκεύθηκαν!");
+	}
+	}
+	reNumberItems(list_id);
+	//alert("Οι αλλαγές στη λίστα σας αποθηκεύθηκαν.");
 	}
 }
 	
 function reNumberItems(list_id){
 
 try{
-	if(!list_id){list_id=findList(event.target);};
+	if(!list_id){list_id=findList(event.target);}
 		const orderID = Array.from(document.getElementsByClassName("order_id_" + list_id));
 		orderID.forEach((row, index) => {
 			row.value = "";
@@ -236,7 +227,7 @@ try{
 
 function reNumberLists(list_id){
 try{
-if(!list_id){list_id=findList(event.target);};
+if(!list_id){list_id=findList(event.target);}
 const lists = Array.from(document.getElementsByClassName("order_id_"+list_id));
 for (var i = 0; i<lists.length; i++){
 		try{
@@ -253,11 +244,11 @@ for (var i = 0; i<lists.length; i++){
 }	
 
 function findList(list){
-	console.log(list.id);
+listNumber=list.parentNode.parentNode.id;
 var list_id="";
-if(list.id.includes("row_")){
-list_id = listNumber.split(listNumber.slice(0,4))[1];
-}
+// if(list.id.includes("row_")){
+// list_id = listNumber.split(listNumber.slice(0,4))[1];
+// }
 if(list.id.includes("Collapse_List_")){
 list_id = listNumber.split(listNumber.slice(0,14))[1];
 }
@@ -266,13 +257,12 @@ list_id = listNumber.split(listNumber.slice(0,16))[1];
 }
 if(list.id.includes("Collapse_tr_")){
 list_id = listNumber.split(listNumber.slice(0,12))[1];
-}	
-console.log("1. "+list_id);
+}
 return list_id;
 }	
 
 //Add New List Colapsable
-function addNewListColapse(title, list_id){
+function addNewListColapse(title, list_id, list_order_id){
 
 	const listNumber = $("div[class*='ListCount']").length;
 	var new_list_id;
@@ -286,6 +276,7 @@ function addNewListColapse(title, list_id){
 			alert("Η δημιουργία νέας λίστας ακυρώθηκε!\nΔοκιμάστε ξανά.");
 			return 0;
 		}else{
+		select_lists(0);
 		create_new_list(title, list_id);
 		}
 	}
@@ -299,13 +290,14 @@ function addNewListColapse(title, list_id){
 
 	list.setAttribute("id", "Collapse_List_"+list_id);
 	list.setAttribute("class", "collapse ListCount modal-content");
-	list.setAttribute("style", "width: 600px;");
+	//list.setAttribute("style", "width: 450px;");
+	list.setAttribute("style", "margin:5px");
 
 	button.setAttribute("id", "Collapse_Button_"+list_id);
 	button.setAttribute("class", "btn btn-primary");
 	button.setAttribute("data-toggle", "collapse");
 	button.setAttribute("data-target", "#Collapse_List_"+list_id);
-	button.setAttribute("style", "width: 160px; height: 140px;");
+	button.setAttribute("style", "width: 160px; height: 140px");
 	
 	newItem.setAttribute("id", "Add_Btn_"+list_id);
 	newItem.setAttribute("class","fa fa-plus");
@@ -316,10 +308,12 @@ function addNewListColapse(title, list_id){
 	new_div.setAttribute("class", "button-container");
 	
 	new_tr.setAttribute("id", "Collapse_tr_"+list_id);
+	new_tr.setAttribute("order_id", list_order_id);
 	new_tr.setAttribute("draggable", "true");
 	new_tr.setAttribute("ondragstart", "start()");
 	new_tr.setAttribute("ondragover", "dragover("+list_id+")");
 	new_tr.setAttribute("ondrop", "dropList("+list_id+")");
+	new_tr.setAttribute("style", "margin: 0px 5px 5px 0px");
 	
 	new_tr.appendChild(button);
 	new_tr.appendChild(list);
@@ -329,7 +323,6 @@ function addNewListColapse(title, list_id){
 	document.getElementById("listoflists_collapsable").appendChild(new_tr);
 	document.getElementById("Collapse_Button_"+list_id).textContent=title;
 	document.getElementById("Collapse_List_"+list_id).appendChild(newItem);
-
 }
 
 function fetch_user_lists(user_id, active){
@@ -338,13 +331,14 @@ function fetch_user_lists(user_id, active){
   	xhttp.open("GET", "api/fetch_lists.php?user_lists="+user_id+"&active_list="+active,true);
 	xhttp.send();
 	xhttp.onload = function() {
+		console.log(this.responseText);
 	var obj = JSON.parse(this.responseText);
 	obj.forEach(function(a){
 	const par = document.createElement("p");
-	addNewListColapse(a.title, a.list_id);
+	addNewListColapse(a.title, a.list_id, a.list_order_id);
 	fetch_list_products(a.list_id);
 	});
-	}	
+	};
 }
 
 function fetch_list_products(list_id){
@@ -366,7 +360,7 @@ function fetch_list_products(list_id){
 	}
 	}
 	});
-	}
+	};
 }
 
 let debounceTimeout;
@@ -415,7 +409,7 @@ for (i=0;i<list_items;i++){
 			}
 			});	
 		}	
-	}
+	};
 }	
 	}catch(error){
 	error.message;
@@ -461,10 +455,10 @@ function create_new_list(title, list_id, icon){
 		list_id = obj.last_inserted_id;	
 		}
 	save_list_changes(list_id);
-	}
+	};
 }
 
-function select_lists(){
+function select_lists(check_flag){
 	
 	//const checkBox = document.createElement("input");
 
@@ -472,23 +466,27 @@ function select_lists(){
 	
 	all_lists.forEach((list)=>{ 
 	
-	var chk = document.getElementById(list.lastChild.id);
+	var chk = document.getElementById(list.id);
 	list_id = list.firstChild.id.split(list.firstChild.id.slice(0,16))[1];
 	
-	if(!chk.classList.contains("btn")){
+	if(!chk.lastChild.classList.contains("list_options") && check_flag==null){
 	const btn1 = document.createElement("button");
 	const btn2 = document.createElement("button");
 	const btn3 = document.createElement("button");
 	const btn4 = document.createElement("button");
+	const div1 = document.createElement("div");
 	
 	//list.classList.add ("close-btn");
-	list.setAttribute("style", "display:flex");
-	list.setAttribute("style", "flex-direction:column; align-items:flex-start");
+	//list.setAttribute("style", "display:flex");
+	//list.setAttribute("style", "flex-direction:row; align-items:flex-start");
+	div1.setAttribute("class", "list_options");
 
-	list.append(btn1);
-	list.append(btn2);
-	list.append(btn3);
-	list.append(btn4);
+	div1.append(btn1);
+	div1.append(btn2);
+	div1.append(btn3);
+	div1.append(btn4);
+
+	list.appendChild(div1);
 	
 	btn1.setAttribute("id", "btn1_"+list.id);
 	btn1.setAttribute("class","btn fa fa-edit");
@@ -514,9 +512,9 @@ function select_lists(){
 	
 	}else{
 		list.lastChild.remove();
-		list.lastChild.remove();
-		list.lastChild.remove();
-		list.lastChild.remove();
+		//list.lastChild.remove();
+		//list.lastChild.remove();
+		//list.lastChild.remove();
 		}
 	});
 }
@@ -543,7 +541,7 @@ const xhttp = new XMLHttpRequest();
 	//	if (!error){			
 		temp1.innerText = title;
 	//}
-	}
+	};
 }
 }
 
@@ -559,7 +557,7 @@ function delete_list(list_id){
 	xhttp.send(data);
 	xhttp.onload = function() {
 	console.log(this.responseText);
-	}
+	};
 	document.getElementById("Collapse_tr_"+list_id).remove();
 	}else{
 		alert("Η ενέργεια ακυρώθηκε.");
@@ -586,7 +584,7 @@ function share_list(list_id){
 	console.log(this.responseText);
 	//var obj = JSON.parse(this.responseText);
 	//save_list_changes(list_id);
-	}
+	};
 	}
 }
 
@@ -602,11 +600,11 @@ function archive_list(list_id){
 	xhttp.send(data);
 	xhttp.onload = function() {
 		console.log(this.responseText);
-	}
+	};
 }
 
 function fetch_archived_lists(user_id, active){
-console.log(user_id+ ", " + active);
+
 	const xhttp = new XMLHttpRequest();
   	xhttp.open("GET", "api/fetch_lists.php?user_lists="+user_id+"&active_list="+active,true);
 	xhttp.send();
@@ -614,12 +612,44 @@ console.log(user_id+ ", " + active);
 	var obj = JSON.parse(this.responseText);
 	obj.forEach(function(a){
 	const par = document.createElement("p");
-	addNewListColapse(a.title, a.list_id);
+	addNewListColapse(a.title, a.list_id, a.list_order_id);
 	fetch_list_products(a.list_id);
 	});
-	}	
+	};
 }
 
+function archive_toggle(){
+
+const curr_lists = Array.from(document.getElementById("listoflists_collapsable").children);
+
+curr_lists.forEach((list,order)=>{
+	list.remove();
+});
+
+const arc_tog = document.getElementById("archive_toggle");
+var user_id;
+
+	const xhttp = new XMLHttpRequest();
+  	xhttp.open("POST", "api/archive_toggle.php?",true);
+	xhttp.send();
+	xhttp.onload = function() {
+		console.log(this.responseText);
+	var obj = JSON.parse(this.responseText);
+		user_id = obj;
+		
+if(arc_tog.classList.contains("Archived_Lists")){
+	arc_tog.classList.remove("Archived_Lists");
+	arc_tog.classList.add ("Active_Lists");
+	arc_tog.innerText="ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ";
+	fetch_user_lists(user_id, 1);
+	}else{
+	arc_tog.classList.remove("Active_Lists");
+	arc_tog.classList.add ("Archived_Lists");
+	arc_tog.innerText="ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΛΙΣΤΕΣ";
+	fetch_archived_lists(user_id, 0);
+	}
+	};
+}
 
 //Fancy Reordering
 var row;
@@ -671,7 +701,7 @@ if (chk.includes("Collapse_List_")){
 }
 
 function drop(list_id){
-console.log("You've changed the order of "+list_id+" list.");
+console.log("You've changed the order of list "+list_id);
 	var temp_btn_order = document.querySelectorAll('[id*="Collapse_Button_"]');
 	temp_btn_order.forEach((a,b)=>{
 	console.log(b);
@@ -698,9 +728,9 @@ const curr_lists = Array.from(document.getElementById("listoflists_collapsable")
 curr_lists.forEach((list,order)=>{
 	
 	list.setAttribute("order_id",order);
-	list_id=findList(event.target);
 	
-	list_order_id = document.getElementById("Collapse_tr_"+list_id).getAttribute("order_id");
+	list_id = list.id.split(list.id.slice(0,12))[1];
+	list_order_id = order; 
 	
 	var data = new FormData();
 	
@@ -711,7 +741,7 @@ curr_lists.forEach((list,order)=>{
   	xhttp.open("POST", "api/edit_lists.php?",true);
 	xhttp.send(data);
 	xhttp.onload = function() {
-	
-	}
+		console.log(this.responseText);
+	};
 	});
 }

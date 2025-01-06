@@ -35,6 +35,7 @@ if (isset($_SESSION['user_id']) && isset($_POST['update_title'])) {
 	} 
 }
 
+
 if (isset($_SESSION['user_id']) && isset($_POST['update_list_order_id'])) {
 		try {
 		$connection = new PDO($dsn, $username, $password, $options);
@@ -55,6 +56,9 @@ if (isset($_SESSION['user_id']) && isset($_POST['update_list_order_id'])) {
 		
 		$statement = $connection->prepare($sql);
 		$statement->execute($update_lists);
+		
+		print_r($_POST['list_id']);
+		print_r($_POST['update_list_order_id']);
 		
 		}catch(PDOException $error) {
 		  echo $sql . "<br>" . $error->getMessage();

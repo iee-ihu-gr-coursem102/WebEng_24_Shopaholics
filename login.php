@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 // Initialize the session
 session_start(); 
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -94,12 +90,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <?php require "templates/header.php";?>
 <!-- Header -->
 <!--header id="header" class="skel-layers-fixed center">
-	<h1><a href="login.php"><img src="images/main_logo.png"></a></h1>
+	<h1><a href="login.php"><img src="images/main_logo.png" width="200" height="90"></a></h1>
 </header-->
 
     <section id="one" class="wrapper style1">
 		<header class="major">
-			<h2><a href="login.php"><img src="images/main-logo-medium.png"></a></h2>
+			<h2><a href="login.php"><img src="images/main_logo.png" width="200" ></a></h2>
 				<h3><p>Παρακαλώ εισάγετε τα στοιχεία σας για να συνδεθείτε.</p></h3>
 		</header>
 			<div class="container">
@@ -122,10 +118,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 								<input type="submit" class="btn btn-primary" value="ΣΥΝΔΕΣΗ">
 							</div>
 
-				<p>Δεν έχετε εγγραφεί ακόμη?! <a href="register.html">Εγγραφείτε τώρα!</a></p>
+				<p>Δεν έχετε εγγραφεί ακόμη?! <a href="register.php">Εγγραφείτε τώρα!</a></p>
 						</form>
 
-<div class="text-right"><i><a href="reset_password.php">Ξέχασα το συνθηματικό μου...</i></a></div>
+<div class="text-right"><i><a href="forgot-password.html">Ξέχασα το συνθηματικό μου...</i></a></div>
 
 					</div> 
 				</div>
