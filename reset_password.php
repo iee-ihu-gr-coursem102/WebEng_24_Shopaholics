@@ -35,7 +35,7 @@ require "templates/header.php";?>
 								<input type="submit" class="btn btn-primary" value="RESET">
 							</div>
 
-				<p>Δεν έχετε εγγραφεί ακόμη?! <a href="register.php">Εγγραφείτε τώρα!</a></p>
+				<p>Δεν έχετε εγγραφεί ακόμη?! <a href="register.html">Εγγραφείτε τώρα!</a></p>
 						</form>
 
 					</div> 
