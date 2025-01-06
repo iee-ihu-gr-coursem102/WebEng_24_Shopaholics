@@ -20,7 +20,7 @@ require "templates/header.php";?>
 
     <section id="one" class="wrapper style1">
 		<header class="major">
-			<h2><a href="login.php"><img src="images/main_logo.png" width="200" height="90"></a></h2>
+			<h2><a href="login.php"><img src="images/main-logo-medium.png"></a></h2>
 				<h3><p>Παρακαλώ εισάγετε το e-mail που έχετε δηλώσει για να προχωρήσετε.</p></h3>
 		</header>
 			<div class="container">
