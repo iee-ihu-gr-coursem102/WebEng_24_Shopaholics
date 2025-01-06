@@ -199,7 +199,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 <title>Edit profile</title>
 <!-- Header -->
 <header id="header" class="skel-layers-fixed">
-    <h1><a href="login.php"><img src="images/main_logo.png" width="105" height="100"></a></h1>
+    <h1 style="padding: 5px"><a href="login.php"><img src="images/main_logo.png" width="90"></a></h1>
 </header>
 </head>
 <body>

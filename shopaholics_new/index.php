@@ -11,12 +11,13 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
 
 <style>
     #listoflists_collapsable {
-        margin: 5px;
+
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
+        justify-content: center;
+        text-align: center;
     }
-
 </style>
 <body id="top" onload="fetch_user_lists(<?php echo ($_SESSION['user_id']);?>, 1), user_profile(<?php echo ($_SESSION['user_id']);?>)"> 
 <!--onload="checkUser()"-->
@@ -25,7 +26,7 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
 	<div class="align-center">
 		<header id="header" class="skel-layers-fixed" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:center; align-items:center; height:100px;">
 			<h1 class="align-center" style="padding: 5px" ><a href="index.php"><img src="images/main_logo.png" width="90px"></a></h1>
-			<span style="width:40px;"></span>
+			<span style="width:25px;"></span>
 			<div id="user_profile" ></div>
             <span style="width:25px;"></span>
 			<button class="button" style="width: 175px; height: 50px" onclick="logout()">ΑΠΟΣΥΝΔΕΣΗ</button>
@@ -38,17 +39,19 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
 	</div>		
 </div>
 
-<div class="box">
+<div style="display: flex; justify-content: center">
+    <div class="box" style="width: 600px; text-align: center; align-content: center" >
 
-	<button class="button" onclick="select_lists()" style="margin: 0px 5px 5px 5px">ΕΠΙΛΟΓΕΣ ΛΙΣΤΩΝ</button>
-	
-	<button class="button" onclick="addNewListColapse()" style="margin: 0px 5px 5px 0px">ΝΕΑ ΛΙΣΤΑ</button>
+        <button class="button" onclick="select_lists()" style="margin: 0px 5px 10px 0px">ΕΠΙΛΟΓΕΣ ΛΙΣΤΩΝ</button>
 
-	<button id="archive_toggle" class="button Active_Lists" onclick="archive_toggle()" style="margin: 0px 5px 5px 0px">ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ</button>
+        <button class="button" onclick="addNewListColapse()" style="margin: 0px 5px 10px 0px">ΝΕΑ ΛΙΣΤΑ</button>
 
+        <button id="archive_toggle" class="button Active_Lists" onclick="archive_toggle()" style="margin: 0px 5px 10px 0px">ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ</button>
 
-    <div id="listoflists_collapsable" ></div>
+        <div id="listoflists_collapsable" ></div>
+    </div>
 </div>
+
 
 <!-- Footer -->
 <?php require "templates/footer.php";?>
