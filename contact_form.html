@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="icon" type="image/png" href="/images/icon.png" />
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+    <title>Login</title>
+
 </head>
-<header>
     <a href="index.php">
-        <img src="images/main_logo.png" width="105px">
+        <img src="images/main_logo.svg" heigth="200px">
     </a>
 </header>
 <body>
-    <h1>Φόρμα επικοινωνίας</h1>
-    
-    <form method="post" action="mailer/send-email.php">
-        <label for="name">Όνομα</label>
-        <input type="text" name="name" id="name" required>
-        
-        <label for="email">e-mail</label>
-        <input type="email" name="email" id="email" required>
-        
-        <label for="subject">Θέμα</label>
-        <input type="text" name="subject" id="subject" required>
-        
-        <label for="message">Μήνυμα</label>
-        <textarea name="message" id="message" required></textarea>
-        
-        <br>
-        
-        <button>Αποστολή</button>
-    </form>
-
+       <header class="major">
+            <h2><img src="images/main-logo.svg" height="200px"></h2>
+            <p style="color:#3c4db5;">Φόρμα επικοινωνίας</p>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+			<form method="post" action="mailer/send-email.php">
+	                <div class="form-group">
+			        <label for="name">Όνομα</label>
+        			<input type="text" name="name" id="name" required>
+        		</div>
+       	                <div class="form-group">
+			        <label for="email">e-mail</label>
+        			<input type="email" name="email" id="email" required>
+        		</div>
+	                <div class="form-group">
+	                        <label for="subject">Θέμα</label>
+			        <input type="text" name="subject" id="subject" required>
+        		</div>
+	                <div class="form-group">
+	                        <label for="message">Μήνυμα</label>
+			        <textarea name="message" id="message" required></textarea>
+			</div>
+				<br>
+			        <button>Αποστολή</button>
+		        </form>		
+        	</div>
+            </div>
+        </div>
 </body>
 </html>
