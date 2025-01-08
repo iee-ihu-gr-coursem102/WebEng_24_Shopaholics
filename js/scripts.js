@@ -510,12 +510,15 @@ function select_lists(check_flag){
 	btn4.setAttribute("onclick","archive_list("+list_id+")");
 
 	
-	}else{
-		list.lastChild.remove();
-		//list.lastChild.remove();
-		//list.lastChild.remove();
-		//list.lastChild.remove();
+	}
+	else
+	{
+		if(chk.lastChild.classList.contains("list_options"))
+		{
+			list.lastChild.remove();
 		}
+		
+	}
 	});
 }
 
@@ -641,12 +644,12 @@ if(arc_tog.classList.contains("Archived_Lists")){
 	arc_tog.classList.remove("Archived_Lists");
 	arc_tog.classList.add ("Active_Lists");
 	arc_tog.innerText="ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ";
-	fetch_user_lists(user_id, 1);
+	fetch_user_lists(user_id, 0);
 	}else{
 	arc_tog.classList.remove("Active_Lists");
 	arc_tog.classList.add ("Archived_Lists");
 	arc_tog.innerText="ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΛΙΣΤΕΣ";
-	fetch_archived_lists(user_id, 0);
+	fetch_archived_lists(user_id, 1);
 	}
 	};
 }

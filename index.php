@@ -27,9 +27,9 @@ if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
 	<div class="align-center">
 		<header id="header" class="skel-layers-fixed" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:center; align-items:center; height:100px;">
 
-			<h1 class="align-center" style="padding: 150px 0px 0px 50px">
+			<h1 class="align-center" style="padding: 5px 0px 0px 10px">
 				<a href="index.php">
-					<img src="images/main-logo-medium.png" width="200px">
+					<img src="images/main-logo.svg" width="110px">
 				</a>
 			</h1>
 			<span style="width:25px;"></span>
