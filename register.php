@@ -116,8 +116,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>    
     <title>Sign Up</title>
     <!-- Header -->
-<header id="header" class="skel-layers-fixed">
-	<h1><a href="login.php"><img src="images/main_logo.png" width="105" height="100"></a></h1>
+<header class="major">
+			<h2><a href="login.html"><img src="images/main-logo.svg" height="200px"></a></h2>
 </header>
 </head>
 <body>
@@ -133,7 +133,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						<div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
 							<label>e-mail Χρήστη</label>
 							<input type="email" name="email" class="form-control" value="<?php echo $username; ?>">
-							<span class="help-block"><?php echo $username_err; ?></span>
+							<span class="help-block" style="color:red"><?php echo $username_err; ?></span>
 							</br>
 						</div>
                         <div class="form-group">
@@ -151,13 +151,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
 							<label>Κωδικός</label>
 							<input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-							<span class="help-block"><?php echo $password_err; ?></span>
+							<span class="help-block" style="color:red"><?php echo $password_err; ?></span>
 							</br>
 						</div>
 						<div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
 							<label>Επιβεβαίωση Κωδικού</label>
 							<input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-							<span class="help-block"><?php echo $confirm_password_err; ?></span>
+							<span class="help-block" style="color:red"><?php echo $confirm_password_err; ?></span>
 							</br>
 						</div>
 						<div class="form-group">
@@ -165,7 +165,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 							<input type="reset" class="btn btn-default" value="Καθαρισμος">
 						</div>
 						</br>
-						<p>Έχετε ήδη λογαριασμό? <a href="login.php">Συνδεθείτε εδώ</a>.</p>
+						<p>Έχετε ήδη λογαριασμό? <a href="login.html">Συνδεθείτε εδώ</a>.</p>
 					</form>
 					</div> 
 				</div>
