@@ -17,7 +17,7 @@ function user_profile(user){
 	var	email = obj.email;
 		u_p_btn.innerText="Καλώς ήρθες "+name+" "+surname;
 		u_p_btn.onclick = function () {
-			window.location.href = "edit_user_profile.php";
+			window.location.href = "api/edit_user_profile.php";
 		};
 		u_p.append(u_p_btn);
 	});
