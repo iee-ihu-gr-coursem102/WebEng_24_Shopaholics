@@ -21,7 +21,9 @@ http://localhost/shopaholics/mailer/reset-password.php?token=$token
 Η εφαρμογή είναι διαθέσιμη στις παρακάτω διευθύνσεις:
 
 https://smarthome.primehost.ai/shopaholics
+
 https://users.iee.ihu.gr/~meladmar
+
 http://shopaholics24.northeurope.cloudapp.azure.com
 
 
