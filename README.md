@@ -11,9 +11,8 @@ Periklis Voutsas
 Στον τοπικό φάκελο του server που τρέχει την εφαρμογή, προσθέτουμε το φάκελο phpmailer στη διαδρομή mailer/vendor.
 ***
 
-Στο αρχείο send-password-reset.php, στο σημείο 
+Στο αρχείο send-password-reset.php, στο σύνδεσμο 
 
-'Click <a href="http://localhost/shopaholics/mailer/reset-password.php?token=$token">here</a> 
-    to reset your password.' 
+http://localhost/shopaholics/mailer/reset-password.php?token=$token 
 	
 απαιτείται να αντικατασταθεί το localhost/shopaholics με το εκάστοτε domain name, γιατί αυτό αποτελεί το absolute path του link που αποστέλλεται στο χρήστη μέσω e-mail για την επαναφορά του κωδικού του.
