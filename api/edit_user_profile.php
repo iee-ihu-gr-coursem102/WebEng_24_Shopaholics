@@ -3,7 +3,7 @@
 session_start();
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(!isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] != true){
-    header("location: login.php");
+    header("location: ../backend/login.php");
     exit;
 }
 
@@ -130,7 +130,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
-                header("location: index.php");
+                header("location: ../index.php");
             } else{
                 echo "Ωπ! Κάτι στράβωσε. Παρακαλώ δοκιμάστε ξανά.";
             }
@@ -154,7 +154,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 $param_user_id = $_SESSION['user_id'];
 
                 if (mysqli_stmt_execute($stmt)) {
-                    header("location: index.php");
+                    header("location: ../index.php");
 
                 } else {
                     echo "Ωπ! Κάτι στράβωσε. Παρακαλώ δοκιμάστε ξανά.";
@@ -178,82 +178,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-layers.min.js"></script>
-    <script src="js/init.js"></script>
-    <noscript>
-        <link rel="icon" type="image/png" href="/images/icon.png" />
-        <link rel="stylesheet" href="css/skel.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-xlarge.css" />
-    </noscript>
-</head>
-<title>Edit profile</title>
-<!-- Header -->
-<header id="header" class="skel-layers-fixed">
-    <h1><a href="login.php"><img src="images/main-logo.svg height="110"></a></h1>
-</header>
-</head>
-<body>
-<section id="one" class="wrapper style1">
-    <header class="major">
-        <h2>Επεξεργασία προφίλ χρήστη</h2>
-        <h3><p>Συμπληρώστε παρακαλώ τα παρακάτω πεδία.</p></h3>
-    </header>
-    <div class="container">
-        <div class="row">
-            <div class="12u">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
-                        <label>e-mail Χρήστη</label>
-                        <input type="email" name="email" class="form-control" value="<?php echo $username; ?>">
-                        <span class="help-block"></span>
-                        </br>
-                    </div>
-                    <div class="form-group">
-                        <label>Όνομα</label>
-                        <input type="text" name="fname" class="form-control" value="<?php echo $fname; ?>">
-                        <span class="help-block"></span>
-                        </br>
-                    </div>
-                    <div class="form-group">
-                        <label>Επώνυμο</label>
-                        <input type="text" name="surname" class="form-control" value="<?php echo $surname; ?>">
-                        <span class="help-block"></span>
-                        </br>
-                    </div>
-                    <div class="form-group ">
-                        <label>Κωδικός</label>
-                        <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
-                        <span class="help-block"></span>
-                        </br>
-                    </div>
-                    <div class="form-group ">
-                        <label>Επιβεβαίωση Κωδικού</label>
-                        <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
-                        <span class="help-block"></span>
-                        </br>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Υποβολη">
-                        <input type="reset" class="btn btn-default" value="Καθαρισμος">
-                    </div>
-                    </br>
-
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
+<?php require "../frontend/edit_user_profile.html"?>
 <!-- Footer -->
-<?php require "templates/footer.php";?>
-</body>
-</html>
+<?php require "../templates/footer.php";?>

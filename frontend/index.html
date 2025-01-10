@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopaholics</title>
+
+    <style>
+        #listoflists_collapsable {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            text-align: center;
+        }
+        .button {
+
+            height: 40px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body id="top" onload="fetch_user_lists(<?php echo ($_SESSION['user_id']);?>, 1), user_profile(<?php echo ($_SESSION['user_id']);?>)">
+<!--onload="checkUser()"-->
+<!-- Header -->
+<div class="wrapper">
+    <div class="align-center" style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center; align-items:center; height:120px">
+        <header id="header" class="skel-layers-fixed" style="height: 160px" >
+
+            <div>
+                <h1 class="align-center" style="padding: 5px 0px 0px 10px">
+                    <a href="index.php">
+                        <img src="images/main-logo.svg" width="120px">
+                    </a>
+                </h1>
+            </div>
+            <div>
+                <div id="user_profile" ></div>
+
+                <button class="button" onclick="logout()">ΑΠΟΣΥΝΔΕΣΗ</button>
+
+                <button class="button">
+                <a href="frontend/contact_form.html" style="color: white">ΕΠΙΚΟΙΝΩΝΙΑ</a>
+                </button>
+            </div>
+            <div>
+                <button class="button" onclick="select_lists()" >ΕΠΙΛΟΓΕΣ ΛΙΣΤΩΝ</button>
+                <button class="button" onclick="addNewListColapse()" >ΝΕΑ ΛΙΣΤΑ</button>
+                <button id="archive_toggle" class="button Archived_Lists" onclick="archive_toggle()" >ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΛΙΣΤΕΣ</button>
+            </div>
+
+
+        </header>
+    </div>
+</div>
+
+<div style="display: flex; justify-content: center; flex-direction: column; align-items:center">
+    <h3 id="list_title">ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ</h3>
+    <div class="box" style="width: 650px; text-align: center; align-content: center" >
+
+        <div id="listoflists_collapsable" ></div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+
+</body>
+</html>

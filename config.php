@@ -4,10 +4,10 @@
 $host ='localhost';
 
 //$username = "meladmar";
-$username = "meladma";
+$username = "root";
 
 //$password = "8ds@3G+XmN$35";
-$password = "!8pmM$@tz";  
+$password = "";
 $dbname     = "shopaholics"; 
 
 //$socket = '/home/student/ait/2024/meladmar/mysql/run/mysql.sock'; 

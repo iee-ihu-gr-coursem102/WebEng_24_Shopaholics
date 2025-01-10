@@ -1,9 +1,11 @@
-function logout(){window.location.assign("logout.php");}
+function logout(){window.location.assign("backend/logout.php");}
+
 
 function user_profile(user){
 		
 	const u_p = document.getElementById("user_profile");
 	const u_p_btn = document.createElement("button");
+	const u_p_header = document.createElement("h3");
 	
 	const xhttp = new XMLHttpRequest();
   	xhttp.open("GET", "api/user_profiles.php?",true);
@@ -16,10 +18,12 @@ function user_profile(user){
 	var	surname = obj.Surname;
 	var	email = obj.email;
 		u_p_btn.innerText="Καλώς ήρθες "+name+" "+surname;
-		u_p_btn.onclick = function () {
+		u_p_header.innerText="Καλώς ήρθες "+name+" "+surname;
+		u_p_header.onclick = function () {
 			window.location.href = "api/edit_user_profile.php";
 		};
-		u_p.append(u_p_btn);
+		//u_p.append(u_p_btn);
+		u_p.append(u_p_header);
 	});
 	};
 }
@@ -624,6 +628,7 @@ function fetch_archived_lists(user_id, active){
 function archive_toggle(){
 
 const curr_lists = Array.from(document.getElementById("listoflists_collapsable").children);
+const list_title = document.getElementById("list_title");
 
 curr_lists.forEach((list,order)=>{
 	list.remove();
@@ -644,11 +649,13 @@ if(arc_tog.classList.contains("Archived_Lists")){
 	arc_tog.classList.remove("Archived_Lists");
 	arc_tog.classList.add ("Active_Lists");
 	arc_tog.innerText="ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ";
+	list_title.innerText = "ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΛΙΣΤΕΣ";
 	fetch_user_lists(user_id, 0);
 	}else{
 	arc_tog.classList.remove("Active_Lists");
 	arc_tog.classList.add ("Archived_Lists");
 	arc_tog.innerText="ΑΡΧΕΙΟΘΕΤΗΜΕΝΕΣ ΛΙΣΤΕΣ";
+	list_title.innerText = "ΕΝΕΡΓΕΣ ΛΙΣΤΕΣ";
 	fetch_archived_lists(user_id, 1);
 	}
 	};

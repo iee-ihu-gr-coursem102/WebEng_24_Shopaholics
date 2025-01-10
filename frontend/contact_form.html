@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <script src="../js/html5shiv.js"></script><![endif]-->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/skel.min.js"></script>
+    <script src="../js/skel-layers.min.js"></script>
+    <script src="../js/init.js"></script>
+    <script src="../js/scripts.js"></script>
+
+    <link rel="icon" type="image/png" href="../images/icon.png" />
+    <link rel="stylesheet" href="../css/skel.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/style-xlarge.css" />
+    <title>Contact</title>
+<body>
+       <header class="major">
+            <h2><a href="../index.php"><img src="../images/main-logo.svg" height="150px"></a></h2>
+            <h3><p style="color:#3c4db5;">Φόρμα επικοινωνίας</p></h3>
+        </header>
+        <div class="container">
+            <div class="row">
+                <div class="12u">
+                    <form method="post" action="../mailer/send-email.php">
+                        <label for="name">Όνομα</label>
+                        <input type="text" name="name" id="name" required>
+
+                        <label for="email">e-mail</label>
+                        <input type="email" name="email" id="email" required>
+
+                        <label for="subject">Θέμα</label>
+                        <input type="text" name="subject" id="subject" required>
+
+                        <label for="message">Μήνυμα</label>
+                        <textarea name="message" id="message" required></textarea>
+
+                        <br>
+
+                        <button>Αποστολή</button>
+                    </form>
+        	    </div>
+            </div>
+        </div>
+</body>
+</html>

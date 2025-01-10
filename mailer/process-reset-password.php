@@ -57,4 +57,4 @@ $stmt->bind_param("ss", $password_hash, $user["user_id"]);
 
 $stmt->execute();
 
-header("location: ../login.php");
+header("location: ../frontend/login.html");

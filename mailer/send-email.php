@@ -25,4 +25,4 @@ try {
 }
 //echo "Thank you for sending us an email.";
 
-header("Location: ../sent_mail.html");
+header("Location: ../frontend/sent_mail.html");

@@ -36,7 +36,7 @@ if (strtotime($user["token_expiration"]) <= time()) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
 </head>
 <header>
-    <a href="../login.php">
+    <a href="../frontend/login.html">
         <img src="../images/main_logo.png" width="105px">
     </a>
 </header>

@@ -30,7 +30,7 @@ if ($mysqli->affected_rows) {
     $mail->Subject = "Password Reset";
     $mail->Body = <<<END
 
-    Click <a href="http://localhost/mailer/reset-password.php?token=$token">here</a> 
+    Click <a href="http://localhost/shopaholics/mailer/reset-password.php?token=$token">here</a> 
     to reset your password.
 
     END;
@@ -47,5 +47,5 @@ if ($mysqli->affected_rows) {
 
 }
 
-header("location: ../login.php");
+header("location: ../frontend/login.html");
 

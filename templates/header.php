@@ -11,13 +11,13 @@
 		<!--script src="js/skel-layers.min.js"></script-->
 		<script src="js/init.js"></script>
 		<script src="js/scripts.js"></script>
-		<noscript>
+
 			<link rel="icon" type="image/ico" href="images/icon.ico" />
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
 			<link rel="stylesheet" href="css/style-xlarge.css" />
 			<link rel="stylesheet" href="css/font-awesome.min.css" />
-		</noscript>
+
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
