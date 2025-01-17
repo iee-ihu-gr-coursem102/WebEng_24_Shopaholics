@@ -121,7 +121,7 @@ function addNewProduct(list_id, item_id, order_id, item, quantity, measuring_uni
 	select_button.setAttribute("draggable", "false");
 	select_button.setAttribute("maxlength", "12");
 	select_button.setAttribute("rows", "1");
-	select_button.onchange = function(){save_product_changes(list_id);};
+	select_button.onchange = function(){save_list_changes(list_id);};
 	select_button.value = measuring_unit;
 
 	td5.setAttribute("style", "width: 5%");
